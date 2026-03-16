@@ -19,7 +19,7 @@ jobs:
           docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260313
           
           # 2. 修改标签 (请将下面的 'your-namespace' 替换为你刚才在阿里云创建的命名空间)
-          docker tag ghcr.io/autowarefoundation/autoware:universe-devel-cuda registry.cn-hangzhou.aliyuncs.com/ws_autoware/autoware:devel-cuda
+          docker tag ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260313 registry.cn-hangzhou.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-cuda-20260313
           
           # 3. 推送到阿里云
-          docker push registry.cn-hangzhou.aliyuncs.com/ws_autoware/autoware:devel-cuda
+          docker push registry.cn-hangzhou.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-cuda-20260313
