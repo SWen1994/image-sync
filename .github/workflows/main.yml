@@ -1,0 +1,25 @@
+name: Sync Autoware Image
+on: 
+  workflow_dispatch: # 手动触发运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Aliyun
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com # 根据你的区域修改
+          username: ${{ secrets.ALIBABA_CLOUD_USER }}
+          password: ${{ secrets.ALIBABA_CLOUD_PASSWORD }}
+
+      - name: Pull and Push
+        run: |
+          # 1. 拉取 GitHub 镜像 (GitHub 内部拉取极快)
+          docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260313
+          
+          # 2. 修改标签 (请将下面的 'your-namespace' 替换为你刚才在阿里云创建的命名空间)
+          docker tag ghcr.io/autowarefoundation/autoware:universe-devel-cuda registry.cn-hangzhou.aliyuncs.com/your-namespace/autoware:devel-cuda
+          
+          # 3. 推送到阿里云
+          docker push registry.cn-hangzhou.aliyuncs.com/ws_autoware/autoware:devel-cuda
