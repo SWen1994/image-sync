@@ -9,7 +9,7 @@ jobs:
       - name: Login to Aliyun
         uses: docker/login-action@v3
         with:
-          registry: registry.cn-hangzhou.aliyuncs.com # 根据你的区域修改
+          registry: crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com # 根据你的区域修改
           username: ${{ secrets.ALIBABA_CLOUD_USER }}
           password: ${{ secrets.ALIBABA_CLOUD_PASSWORD }}
 
