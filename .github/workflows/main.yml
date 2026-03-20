@@ -19,7 +19,7 @@ jobs:
           docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
           
           # 2. 修改标签 (请将下面的 'your-namespace' 替换为你刚才在阿里云创建的命名空间)
-          docker tag docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64 crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
+          docker tag ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64 crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
           
           # 3. 推送到阿里云
           docker push crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
