@@ -16,10 +16,10 @@ jobs:
       - name: Pull and Push
         run: |
           # 1. 拉取 GitHub 镜像 (GitHub 内部拉取极快)
-          docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260313
+          docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
           
           # 2. 修改标签 (请将下面的 'your-namespace' 替换为你刚才在阿里云创建的命名空间)
-          docker tag ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260313 crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-cuda-20260313
+          docker tag docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64 crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
           
           # 3. 推送到阿里云
-          docker push crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-cuda-20260313
+          docker push crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
