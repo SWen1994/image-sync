@@ -1,5 +1,6 @@
 name: Sync Autoware Image
-on: 
+
+on:
   workflow_dispatch: # 手动触发运行
 
 jobs:
@@ -9,17 +10,25 @@ jobs:
       - name: Login to Aliyun
         uses: docker/login-action@v3
         with:
-          registry: crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com # 根据你的区域修改
+          registry: crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com
           username: ${{ secrets.ALIBABA_CLOUD_USER }}
           password: ${{ secrets.ALIBABA_CLOUD_PASSWORD }}
 
       - name: Pull and Push
         run: |
-          # 1. 拉取 GitHub 镜像 (GitHub 内部拉取极快)
-          docker pull ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
+          # 定义变量，方便管理这个超长的镜像名
+          SOURCE_IMAGE="ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-cuda-20260323@sha256:bf3233efe9cc47036fa1b931cac0e9e4dbd8db29c1fbd83db9488c881ea6448a"
           
-          # 2. 修改标签 (请将下面的 'your-namespace' 替换为你刚才在阿里云创建的命名空间)
-          docker tag ghcr.io/autowarefoundation/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64 crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
+          # 阿里云目标镜像名（建议去掉 sha256 部分，使用一个易读的 tag）
+          TARGET_IMAGE="crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-cuda-20260323-arm64"
+
+          echo "正在拉取镜像: $SOURCE_IMAGE"
+          docker pull $SOURCE_IMAGE
+
+          echo "正在修改标签..."
+          docker tag $SOURCE_IMAGE $TARGET_IMAGE
+
+          echo "正在推送到阿里云..."
+          docker push $TARGET_IMAGE
           
-          # 3. 推送到阿里云
-          docker push crpi-p4cfqm8ex8kjfok2.cn-hangzhou.personal.cr.aliyuncs.com/ws_autoware/autoware:universe-sensing-perception-devel-20260319-jazzy-arm64
+          echo "同步完成！"
